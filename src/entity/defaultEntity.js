@@ -29,7 +29,7 @@ const defaultEntity = (state: State) => ({
   y: state.canvas.cursor.y - state.config.entityTypes[entityType].height / 2,
   width: state.config.entityTypes[entityType].width,
   height: state.config.entityTypes[entityType].height,
-  name: 'test',
+  name: 'Nombre Tarea',
   isAnchored: true,
   isSelected: false,
   anchor: {

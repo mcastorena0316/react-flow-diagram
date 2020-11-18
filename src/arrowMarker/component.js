@@ -8,16 +8,20 @@ import style from 'styled-components';
  * ==================================== */
 
 const Arrow = style.path`
-  fill: black;
+  fill:  ${props => props.color ? props.color : 'black'};
   stroke-width: 1px;
   stroke-linecap: round;
   stroke-dasharray: 10000, 1;
-  stroke: black;
+  stroke: ${props => props.color ? props.color : 'black'};
 `;
 
-const ArrowMarker = () => (
+type ArrowMarkerProps = {
+  color: ?string,
+};
+
+const ArrowMarker = ({ color }: ArrowMarkerProps)  => (
   <marker
-    id="arrow-end"
+    id={`arrow-end-${color ? color : 'black' }`}
     viewBox="0 0 20 20"
     refX="11"
     refY="10"
@@ -25,7 +29,7 @@ const ArrowMarker = () => (
     markerHeight="10"
     orient="auto"
   >
-    <Arrow d="M 1 5 L 11 10 L 1 15 Z" />
+    <Arrow d="M 1 5 L 11 10 L 1 15 Z" color={color} />
   </marker>
 );
 

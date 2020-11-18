@@ -72,6 +72,7 @@ const model: EntityState = [
     linksTo: [
       {
         target: 'ja1lnx2u',
+        color: 'purple',
         edited: false,
         points: [
           {
