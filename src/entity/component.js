@@ -64,9 +64,11 @@ const contextMenuActions = (props: EntityProps): ContextMenuActions => {
   };
 
   const connectAction = {
-    action: () => props.connecting({ currently: true, from: props.model.id }),
+    action: (e) => (
+      props.connecting({ currently: true, from: props.model.id, color: e.currentTarget.id.split('-')[1]})),
     iconVariety: 'arrow',
     label: 'Connect',
+    colors:  props.model.type == 'Task' ? ['green', 'red'] : ''
   };
 
   const addEntities = props.entityTypeNames.map(entityTypeName => ({
@@ -109,7 +111,9 @@ const Entity = (props: EntityProps) => (
     >
       {props.children}
     </div>
-    {props.isSelected && <ContextMenu actions={contextMenuActions(props)} />}
+    { (props.isSelected && props.model.type !== 'Task') && <ContextMenu actions={contextMenuActions(props)} model= {props.model.type}/>}
+    { (props.isSelected && props.model.type === 'Task') && <ContextMenu actions={contextMenuActions(props)} model={props.model.type}/>}
+
   </EntityStyle>
 );
 

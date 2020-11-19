@@ -284,9 +284,10 @@ class CanvasContainer extends React.PureComponent<
 }
 
 const makeConnectingLinks = (state: State): LinksType => {
+  const entity_info = state.entity.find(entity => entity.id === state.canvas.connecting.from)
   if (state.canvas.connecting.currently) {
     const points: Array<Point> = calcLinkPoints(
-      state.entity.find(entity => entity.id === state.canvas.connecting.from),
+     state.entity.find(entity => entity.id === state.canvas.connecting.from),
       {
         x: state.canvas.cursor.x,
         y: state.canvas.cursor.y,
@@ -298,6 +299,7 @@ const makeConnectingLinks = (state: State): LinksType => {
       {
         target: 'will_connect',
         edited: false,
+        color: entity_info.type ==='Task' ? state.canvas.connecting.color : 'black',
         points,
       },
     ];

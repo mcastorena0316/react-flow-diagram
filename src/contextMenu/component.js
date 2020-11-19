@@ -28,24 +28,38 @@ export type ContextMenuActions = Array<{
 }>;
 
 const stopActionPropagation = (action: Function) => (
-  ev: SyntheticMouseEvent<HTMLElement>
+  ev: SyntheticMouseEvent<HTMLElement>,
 ): void => {
+  console.log(ev.currentTarget.id.split('-')[1])
   ev.stopPropagation();
   action(ev);
 };
 
 type ContextMenuProps = {
   actions: ContextMenuActions,
+  model: string,
 };
 const ContextMenu = (props: ContextMenuProps) => (
   <ContextMenuStyle>
     {props.actions.map(action => (
-      <Action
-        key={action.label}
-        onMouseDown={stopActionPropagation(action.action)}
-      >
-        <Icon name={action.iconVariety} label={action.label} />
-      </Action>
+      action.iconVariety === 'arrow' && props.model=== 'Task' ? 
+      ( 
+        <g>
+         <Action key={`${action.label}-${action.colors[0]}`} id={`${action.label}-${action.colors[0]}`} onMouseDown={stopActionPropagation(action.action)} >
+          <Icon name={action.iconVariety} label={action.label} color={action.colors[0]}/> 
+        </Action>
+         <Action  key={`${action.label}-${action.colors[1]}`} id={`${action.label}-${action.colors[1]}`}  onMouseDown={stopActionPropagation(action.action)}>
+          <Icon name={action.iconVariety} label={action.label} color={action.colors[1]} /> 
+        </Action>
+        </g>
+      ) : 
+      <Action 
+         key={action.label}
+          onMouseDown={stopActionPropagation(action.action)}
+        >
+        <Icon name={action.iconVariety} label={action.label}/> 
+      </Action> 
+
     ))}
   </ContextMenuStyle>
 );

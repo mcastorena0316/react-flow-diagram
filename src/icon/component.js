@@ -12,7 +12,7 @@ import type { Element } from 'react';
 const Svg = style.svg`
   width: 1.25em;
   & > path {
-    fill: #444;
+    fill:  ${props => props.color ? props.color : '#444'};
   }
 `;
 
@@ -67,9 +67,11 @@ export type IconVariety = string;
 type IconProps = {
   name: IconVariety,
   label?: string,
+  color?: string,
 };
-const Icon = ({ name, label }: IconProps) => (
+const Icon = ({ name, label, color }: IconProps) => (
   <Svg
+    color = {color}
     xmlns="http://www.w3.org/2000/svg"
     viewBox={`0 0 ${icons.get(name).size.toString()} ${icons
       .get(name)

@@ -130,6 +130,7 @@ const entityReducer = (
                         {
                           target: payload,
                           edited: false,
+                          color: canvas.connecting.color,
                           points: calcLinkPoints(
                             entity,
                             state.find(ent => ent.id === payload)

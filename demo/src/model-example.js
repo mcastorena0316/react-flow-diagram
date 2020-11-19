@@ -20,6 +20,7 @@ const model: EntityState = [
       {
         target: 'ja1lnkqu',
         edited: false,
+        color: 'orange',
         label: 'Is friends with',
         points: [
           {
